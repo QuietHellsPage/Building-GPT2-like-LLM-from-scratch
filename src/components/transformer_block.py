@@ -7,10 +7,12 @@ from src.components.multihead_attention import MultiHeadAttention
 from src.components.layer_norm import LayerNorm
 from src.components.ffn import FeedForward
 
+
 class TransformerBlock(nn.Module):
     """
     TRF block class
     """
+
     def __init__(self, config):
         super().__init__()
 
@@ -20,7 +22,7 @@ class TransformerBlock(nn.Module):
             context_length=config["context_len"],
             num_heads=config["n_heads"],
             dropout=config["drop_rate"],
-            qkv_bias=config["qkv_bias"]
+            qkv_bias=config["qkv_bias"],
         )
 
         self.ffn = FeedForward(config=config)

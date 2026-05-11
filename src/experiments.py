@@ -1,6 +1,7 @@
 """
 This dirty file has code with experiments and tests I make while creating the components of the model
 """
+
 import torch
 from src.components.gptmodel import GPTModel
 
@@ -11,7 +12,7 @@ def generate(model, idx, max_new_tokens, context_size):
 
         with torch.no_grad():
             logits = model(idx_cond)
-        
+
         last_logits = logits[:, -1, :]
         probas = torch.softmax(last_logits, dim=-1)
         idx_next = torch.argmax(probas, dim=-1, keepdim=True)
@@ -19,6 +20,7 @@ def generate(model, idx, max_new_tokens, context_size):
         idx = torch.cat((idx, idx_next), dim=1)
 
         return idx
+
 
 """
 Testing models
@@ -33,7 +35,7 @@ CONFIG = {
     "n_heads": 12,
     "n_layers": 12,
     "drop_rate": 0.1,
-    "qkv_bias": False
+    "qkv_bias": False,
 }
 
 tokenizer = tiktoken.get_encoding("gpt2")
